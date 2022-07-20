@@ -1,10 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <Navbar></Navbar>
   <router-view/>
 </template>
+
+<script> 
+  import Navbar from "@/components/Utils/NavBar.vue";
+  export default{
+    name : "home",
+    components : {Navbar},
+  }
+    
+</script>
 
 <style lang="less">
 #app {
@@ -12,19 +18,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: var(--black-lighter);
+  min-height: 100vh;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#app:before{
+  content: '';
+  background-image: url("./assets/images/main_img.jpg");
+  filter: opacity(80%) saturate(85%) grayscale(10%);
+  background-position: 50%;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: -1;
 }
 </style>
