@@ -5,8 +5,8 @@
         </div>
         <span class="name">慕师</span>
         <div class="poetry">
-            <span class="signature">譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也</span>
-            <span class="type_cousor type_cousor_1">|</span>
+            <span class="signature">{{signaturelist}}</span>
+            <span class="type_cousor" :class="{type_cousor_1 : isend}">|</span>
         </div>
     </div>
 </template>
@@ -15,6 +15,13 @@
     export default{
         name : "userinfo",
         setup (){
+            const signaturelist = "譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也",
+                isend = true
+
+            const result = {
+                signaturelist,isend
+            }
+            return result
         }
     }
 </script>

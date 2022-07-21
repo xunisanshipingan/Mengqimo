@@ -1,4 +1,4 @@
-function clickEffect() {
+const install = function clickEffect() {
     let balls = [];
     let longPressed = false;
     let longPress;
@@ -132,4 +132,7 @@ function clickEffect() {
       }
     }
   }
-  clickEffect();//调用特效函数
+  export default{
+    install
+  }
+  // clickEffect();//调用特效函数

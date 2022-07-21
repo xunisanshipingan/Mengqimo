@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Anthology from '../views/Anthology.vue'
 
 const routes = [
   // 摘叶飞花
