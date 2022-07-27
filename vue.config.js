@@ -1,6 +1,5 @@
 const path = require('path') 
 module.exports = {
-    
     publicPath: '/Blog/',
     pluginOptions :{
         'style-resources-loader': {
