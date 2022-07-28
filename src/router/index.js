@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
 const routes = [
   // 主页自动跳转
@@ -27,7 +27,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  // history: createWebHistory(process.env.BASE_URL),
+  history : createWebHashHistory(),
   routes
 })
 

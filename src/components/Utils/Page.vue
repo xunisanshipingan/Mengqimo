@@ -1,12 +1,12 @@
 <template>
     <div class="pageBar">
-        <span class="jump" v-show="obj.pageNo != 1" @click="setPageNo(obj.pageNo - 1)">&lt</span>
+        <span class="jump" v-show="obj.pageNo != 1" @click="setPageNo(Number(obj.pageNo) - 1)">&lt</span>
         <span class="jump" v-show="obj.pageNo >= 3" @click="setPageNo(1)">1</span>
         <span class="ellipsis" v-show="obj.pageNo > 3">...</span>
-        <span class="jump" v-for="num in obj.indexs" :class="{bgprimary:obj.pageNo == num}" @click="setPageNo(num)">{{num}}</span>
+        <span class="jump" v-for="num in calcObj.indexs" :class="{current:obj.pageNo == num}" @click="setPageNo(num)">{{num}}</span>
         <span class="ellipsis" v-show="obj.pageNo < (pageCount - 2)">...</span>
         <span class="jump" v-show="obj.pageNo <= pageCount - 2" @click="setPageNo(pageCount)">{{pageCount}}</span>
-        <span class="jump">></span>
+        <span class="jump" @click="setPageNo(Number(obj.pageNo) + 1)">></span>
     </div>
 </template>
 
@@ -15,18 +15,15 @@ import { reactive } from '@vue/reactivity'
 export default {
     name : "Page",
     setup() {
-        // var pageNo      = 5,                        //当前页
-        //       count     = 100,                      //总数量
-        //       showCount = 10,                       //每页显示数量
-        //       pageCount = Math.ceil(count/showCount),    //总页数
-        //       indexs    = getIndexs()               //当前显示页列表
         var obj = reactive({
-            pageNo    : 5,                        //当前页
+            pageNo    : 3,                        //当前页
             count     : 100,                      //总数量
             showCount : 10,                       //每页显示数量
-            indexs    : getIndexs()               //当前显示页列表
         })
         var pageCount = Math.ceil(obj.count/obj.showCount)    //总页数
+        var calcObj = reactive({
+            indexs    : getIndexs()               //当前显示页列表
+        })
         // 设置当前显示页列表
         function getIndexs (){
             var ar = []
@@ -44,10 +41,14 @@ export default {
         // 切换页面函数
         function setPageNo(page){
             obj.pageNo = page
-            obj.indexs = getIndexs()
+            calcObj.indexs = getIndexs()
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
         const result = {
-            obj,setPageNo,pageCount
+            obj,setPageNo,calcObj,pageCount
         }
         return result
     },
@@ -75,6 +76,9 @@ export default {
             padding: 4px 5px;
             cursor: pointer;
             box-shadow: var(--card-box-shadow);
+            &.current{
+                background: #39aedd73;
+            }
         }
     }
 
