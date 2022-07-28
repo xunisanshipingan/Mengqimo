@@ -6,6 +6,7 @@
         <div class="Foot">
 
         </div>
+        <page></page>
         <div class="Rss">
 
         </div>
@@ -15,9 +16,10 @@
 <script>
 import userinfo from "@/components/BlogList/UserInfo.vue"
 import blogs from "@/components/BlogList/BlogList.vue"
+import page from '@/components/Utils/Page.vue';
 export default {
     name : "bloglist",
-    components : {userinfo, blogs},
+    components : {userinfo, blogs,page},
     setup() {
         
     },

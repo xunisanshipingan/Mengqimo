@@ -1,19 +1,24 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
+  // 主页自动跳转
+  {
+    path: '/',
+    component: () => import('@/views/BlogList.vue')
+  },
   // 摘叶飞花
   {
     path: '/anthology',
     name: 'anthology',
     component: () => import('@/views/Anthology.vue')
   },
-  // 日常随笔
+  // 浮生四梦
   {
     path: '/bloglist',
     name: 'bloglist',
     component: () => import('@/views/BlogList.vue')
   },
-  // 如何订阅
+  // 姻缘一线
   {
     path: '/subscribe',
     name: 'subscribe',
@@ -22,7 +27,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
 
