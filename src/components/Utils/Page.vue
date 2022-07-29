@@ -42,10 +42,7 @@ export default {
         function setPageNo(page){
             obj.pageNo = page
             calcObj.indexs = getIndexs()
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            this.btf.btf.scrollToDest(0,500)
         }
         const result = {
             obj,setPageNo,calcObj,pageCount
