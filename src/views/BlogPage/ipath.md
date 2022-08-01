@@ -20,6 +20,7 @@
 
 #### openjdk -version:8
 - 已安装
+- 与jdk的区别：jdk-oracle公司发布的通用版(包含插件)   openjdk-纯净版(专供开发使用)
 ***
 
 #### mysql -version:5.7
