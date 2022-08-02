@@ -15,6 +15,7 @@
 - 检查logs目录里是否有(access.log|error.log|nginx.PID)
 - nginx -s stop  立即停止，不保存相关信息
 - nginx -s quit  正常退出，并保存相关信息
+- 检查配置文件里路径是否含有中文
 
 ***
 
@@ -25,7 +26,7 @@
 
 #### mysql -version:5.7
 1. 个人试用的话下载社区版本[官网](https://dev.mysql.com/downloads/installer/)
-2. 
+2. 下载完毕后一步步点击安装(选择的开发安装)
 
 ***
 
@@ -39,3 +40,9 @@
 #### redis -version:6.0
 1. 在github上下载安装包[github](https://github.com/tporadowski/redis/releases)
 2. 下载压缩包后解压到本地目录
+3. 配置文件：redis/redis.windows.conf
+4. 在安装目录打开cmd
+5. redis-server.exe启动服务端
+6. 打开另一个cmd
+7. redis-cli.exe -h localhost -p 6379 启动客户端
+8. 进行redis操作
