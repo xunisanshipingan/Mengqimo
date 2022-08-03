@@ -9,3 +9,4 @@
  | Neo4j | o |  |
  | threejs | o |  |
  | Nginx | o |  |
+ | TypeScirpt| o ||

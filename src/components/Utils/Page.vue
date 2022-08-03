@@ -1,12 +1,12 @@
 <template>
     <div class="pageBar">
-        <span class="jump" v-show="obj.pageNo != 1" @click="setPageNo(Number(obj.pageNo) - 1)">&lt</span>
-        <span class="jump" v-show="obj.pageNo >= 3" @click="setPageNo(1)">1</span>
-        <span class="ellipsis" v-show="obj.pageNo > 3">...</span>
-        <span class="jump" v-for="num in calcObj.indexs" :class="{current:obj.pageNo == num}" @click="setPageNo(num)">{{num}}</span>
-        <span class="ellipsis" v-show="obj.pageNo < (pageCount - 2)">...</span>
-        <span class="jump" v-show="obj.pageNo <= pageCount - 2" @click="setPageNo(pageCount)">{{pageCount}}</span>
-        <span class="jump" @click="setPageNo(Number(obj.pageNo) + 1)">></span>
+        <span class="jump" v-show="props.pageNo != 1" @click="setPageNo(Number(props.pageNo) - 1)">&lt</span>
+        <span class="jump" v-show="props.pageNo >= 3" @click="setPageNo(1)">1</span>
+        <span class="ellipsis" v-show="props.pageNo > 3">...</span>
+        <span class="jump" v-for="num in calcObj.indexs" :class="{current:props.pageNo == num}" @click="setPageNo(num)">{{num}}</span>
+        <span class="ellipsis" v-show="props.pageNo < (pageCount - 2)">...</span>
+        <span class="jump" v-show="props.pageNo <= pageCount - 2" @click="setPageNo(pageCount)">{{pageCount}}</span>
+        <span class="jump" @click="setPageNo(Number(props.pageNo) + 1)">></span>
     </div>
 </template>
 
@@ -14,13 +14,18 @@
 import { reactive } from '@vue/reactivity'
 export default {
     name : "Page",
-    setup() {
-        var obj = reactive({
-            pageNo    : 3,                        //当前页
-            count     : 100,                      //总数量
-            showCount : 10,                       //每页显示数量
-        })
-        var pageCount = Math.ceil(obj.count/obj.showCount)    //总页数
+    props : {
+        pageNo : Number,        //当前页
+        count : Number,         //总数量
+        showCount : Number      //每页显示数量
+    },
+    setup(props) {
+        // var props = reactive({
+        //     pageNo    : 1,                        
+        //     count     : 100,                      
+        //     showCount : 10,                       
+        // })
+        var pageCount = Math.ceil(props.count/props.showCount)    //总页数
         var calcObj = reactive({
             indexs    : getIndexs()               //当前显示页列表
         })
@@ -28,10 +33,10 @@ export default {
         function getIndexs (){
             var ar = []
             if(pageCount >= 5){
-                if(obj.pageNo < 3){
+                if(props.pageNo < 3){
                     ar = [1,2,3]
-                }else if(obj.pageNo >= 3 && obj.pageNo <= pageCount - 2){
-                    ar = [Number(obj.pageNo) - 1,obj.pageNo,Number(obj.pageNo) + 1]
+                }else if(props.pageNo >= 3 && props.pageNo <= pageCount - 2){
+                    ar = [Number(props.pageNo) - 1,props.pageNo,Number(props.pageNo) + 1]
                 }else{
                     ar = [pageCount - 2,pageCount - 1,pageCount]
                 }
@@ -40,12 +45,12 @@ export default {
         }
         // 切换页面函数
         function setPageNo(page){
-            obj.pageNo = page
+            props.pageNo = page
             calcObj.indexs = getIndexs()
             this.btf.btf.scrollToDest(0,500)
         }
         const result = {
-            obj,setPageNo,calcObj,pageCount
+            setPageNo,calcObj,pageCount
         }
         return result
     },
