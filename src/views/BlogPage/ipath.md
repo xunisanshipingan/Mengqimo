@@ -46,3 +46,23 @@
 6. 打开另一个cmd
 7. redis-cli.exe -h localhost -p 6379 启动客户端
 8. 进行redis操作
+
+##### Redis配置操作
+1. 安装windows服务
+   1. cmd中打开Redis安装目录
+   2. redis-server --service-install redis.windows.conf
+   3. 运行services.msc找到redis服务并打开
+2. 设置环境变量
+3. 设置Redis密码
+   1. 打开redis.windows.conf
+   2. 找到requirepass fooboard复制到下一行
+   3. 删除注释符#，将fooboard更改为123456
+4. 更改bind限制(允许所有IP访问)
+   1. 打开redis.windows.conf
+   2. 找到bind 127.0.0.1并将其注释
+5. 常用命令
+   1. 登录连接  redis-cli
+   2. 输入密码  auth 123456
+   3. 查看键    keys *
+   4. 清空缓存  flushall/flushdb
+   5. 查看使用  info/info menory/dbsize
