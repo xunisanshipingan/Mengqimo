@@ -2,28 +2,21 @@
 <template>
     <div class="BlogContainer">
         <userinfo></userinfo>
-        <blogs></blogs>
-        <div class="Foot">
-
-        </div>
-        <page :pageNo="1" :total="100" :pageSize="10"></page>
+        <blogs :pageNo="currentPage"></blogs>
+        <page :pageNo="currentPage" :total="100" :pageSize="10"></page>
         <div class="Rss">
 
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import userinfo from "@/components/BlogList/UserInfo.vue"
 import blogs from "@/components/BlogList/BlogList.vue"
-import page from '@/components/Utils/Page.vue';
-export default {
-    name : "bloglist",
-    components : {userinfo, blogs,page},
-    setup() {
-        
-    },
-}
+import page from '@/components/Utils/Page.vue'
+import { ref } from "@vue/reactivity"
+const currentPage = ref(1)
+const total = ref(0)
 </script>
 
 <style lang="less" scoped>
