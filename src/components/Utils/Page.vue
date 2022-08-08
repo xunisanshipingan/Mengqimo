@@ -1,60 +1,61 @@
 <template>
     <div class="pageBar">
-        <span class="jump" v-show="props.pageNo != 1" @click="setPageNo(Number(props.pageNo) - 1)">&lt</span>
-        <span class="jump" v-show="props.pageNo >= 3" @click="setPageNo(1)">1</span>
-        <span class="ellipsis" v-show="props.pageNo > 3">...</span>
-        <span class="jump" v-for="num in calcObj.indexs" :class="{current:props.pageNo == num}" @click="setPageNo(num)">{{num}}</span>
-        <span class="ellipsis" v-show="props.pageNo < (pageCount - 2)">...</span>
-        <span class="jump" v-show="props.pageNo <= pageCount - 2" @click="setPageNo(pageCount)">{{pageCount}}</span>
-        <span class="jump" @click="setPageNo(Number(props.pageNo) + 1)">></span>
+        <!-- 上一页 -->
+        <span class="jump" v-show="currentPage != 1" @click="setCurrentPage(Number(currentPage),'prev')">&lt</span>
+        <!-- 首页 -->
+        <span class="jump" v-show="currentPage >= 3" @click="setCurrentPage(1)">1</span>
+        <span class="ellipsis" v-show="currentPage > 3">...</span>
+        <!-- 页码 -->
+        <span class="jump" v-for="num in pageList" :class="{current:currentPage == num}" @click="setCurrentPage(num)">{{num}}</span>
+        <span class="ellipsis" v-show="currentPage < (pageCount - 2)">...</span>
+        <!-- 尾页 -->
+        <span class="jump" v-show="currentPage <= (pageCount - 2)" @click="setCurrentPage(pageCount)">{{pageCount}}</span>
+        <!-- 下一页 -->
+        <span class="jump" @click="setCurrentPage(Number(currentPage),'next')">></span>
     </div>
 </template>
 
-<script>
-import { reactive } from '@vue/reactivity'
-export default {
-    name : "Page",
-    props : {
-        pageNo : Number,        //当前页
-        count : Number,         //总数量
-        showCount : Number      //每页显示数量
-    },
-    setup(props) {
-        // var props = reactive({
-        //     pageNo    : 1,                        
-        //     count     : 100,                      
-        //     showCount : 10,                       
-        // })
-        var pageCount = Math.ceil(props.count/props.showCount)    //总页数
-        var calcObj = reactive({
-            indexs    : getIndexs()               //当前显示页列表
-        })
-        // 设置当前显示页列表
-        function getIndexs (){
-            var ar = []
-            if(pageCount >= 5){
-                if(props.pageNo < 3){
-                    ar = [1,2,3]
-                }else if(props.pageNo >= 3 && props.pageNo <= pageCount - 2){
-                    ar = [Number(props.pageNo) - 1,props.pageNo,Number(props.pageNo) + 1]
-                }else{
-                    ar = [pageCount - 2,pageCount - 1,pageCount]
-                }
-            }
-            return ar
-        }
-        // 切换页面函数
-        function setPageNo(page){
-            props.pageNo = page
-            calcObj.indexs = getIndexs()
-            this.btf.btf.scrollToDest(0,500)
-        }
-        const result = {
-            setPageNo,calcObj,pageCount
-        }
-        return result
-    },
+<script setup>
+import { reactive, ref } from '@vue/reactivity'
+import { inject, watchEffect } from '@vue/runtime-core'
+const props = defineProps({
+    pageNo : {type:[Number,String], default: 0},        //当前页
+    total  : {type:[Number,String], default: 1},        //总数量
+    pageSize : {type:[Number,String], default: ()=>10}       //每页显示数量
+})
+const emits = defineEmits(["setPageNo","getIndexs"])
+const currentPage = ref(Number(props.pageNo))
+const currentPageSize = ref(Number(props.pageSize))
+const pageCount = Math.ceil(props.total/currentPageSize.value)    //总页数
+const pageList = ref([])      // 当前显示页码
+
+const btf = inject('$btf')
+// 设置页面页码
+const setCurrentPage = (pageNo = 1,type) => {
+    let num = currentPage.value
+    type == "prev" ? num-- : type == "next" ? num++ : (num = Number(pageNo))
+
+    currentPage.value = num < 1 ? 1 : num > pageCount ? pageCount : num
+    btf.btf.scrollToDest(0,500)
+    emits("setPageNo", currentPage.value)
 }
+// 设置当前显示页码
+const getIndexs = () => {
+    if(pageCount >= 5){
+        if(currentPage.value < 3){
+            pageList.value = [1,2,3]
+        }else if(currentPage.value >= 3 && currentPage.value <= pageCount - 2){
+            pageList.value = [Number(currentPage.value) - 1,currentPage.value,Number(currentPage.value) + 1]
+        }else{
+            pageList.value = [pageCount - 2,pageCount - 1,pageCount]
+        }
+    }
+    emits("getIndexs",pageList.value)
+}
+
+watchEffect(() => {
+    getIndexs()
+})
 </script>
 
 <style lang="less" scoped>

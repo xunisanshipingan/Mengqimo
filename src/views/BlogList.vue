@@ -6,7 +6,7 @@
         <div class="Foot">
 
         </div>
-        <page :pageNo="1" :count="100" :showCount="10"></page>
+        <page :pageNo="1" :total="100" :pageSize="10"></page>
         <div class="Rss">
 
         </div>

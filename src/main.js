@@ -12,6 +12,7 @@ app.use(store)
     .use(router)
     .use(fireworks)
 
-app.config.globalProperties.btf = utils
+// app.config.globalProperties.$btf = utils
+app.provide('$btf',utils)
 
 app.mount('#app')

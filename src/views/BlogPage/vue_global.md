@@ -10,20 +10,31 @@
 
 ***
 具体方法如下：
+**注册**
 1. 在utils.js中添加export default
     const btf = {}
     export default {btf}
-
-2. 在main.js中引入utils.js以及添加至vue全局变量
+**使用**
+- **方法一(不推荐)**
+1. 在main.js中引入utils.js以及添加至vue全局变量
     import btf form "@/assets/js/Utils"
     conset app = createApp(App)
-    app.config.globalProperties.btf = btf
+    app.config.globalProperties.$btf = btf
 
-3. 在组件中使用(例如使用utils中的scrollToDest)
+2. 在组件中使用(例如使用utils中的scrollToDest)
     this.btf.btf.scrollToDest(0,500)
-
+- **方法二(使用provide与inject，官方推荐)**
+1. 在main.js中引入utils.js并provide变量
+    import btf form "@/assets/js/Utils"
+    app.provide('$btf',btf)
+2. 在组件中使用(例如使用utils中的scrollToDest)
+    import {inject} from 'vue'
+    const btf = inject('$btf')
 ***
 #### 总结
 至于为什么使用的时候需要写两个btf  现在还没找到原因  到时候有新的心得会继续更新
+
+#### 注意
+使用方法一的时候，setup标签中是不绑定this的，需要在同级script中获取到this
 
 2022年7月29日
