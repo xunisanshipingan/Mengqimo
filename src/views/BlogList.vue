@@ -2,7 +2,7 @@
 <template>
     <div class="BlogContainer">
         <userinfo></userinfo>
-        <blogs :pageNo="currentPage"></blogs>
+        <blogs :pageNo="currentPage" :pageSize="10"></blogs>
         <page :pageNo="currentPage" :total="100" :pageSize="10"></page>
         <div class="Rss">
 

@@ -1,3 +1,6 @@
+// 引入字体css
+import "@/assets/font/font.less"
+// 引入模块
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

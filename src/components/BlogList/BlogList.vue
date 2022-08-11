@@ -1,6 +1,6 @@
 <!-- blogs(获取列表并显示) -->
 <template>
-    <template v-for="item in bloglists" :key="item.id" >
+    <template v-for="item in currentList" :key="item.id" >
         <a href="" class="bloginfo">
             <span class="title">{{item.title}}</span>
             <span class="content">{{item.content}}</span>
@@ -13,7 +13,8 @@
 const { ref }=require("@vue/reactivity")
 
     const props = defineProps({
-        pageNo : {type:[Number,String], default: 1}
+        pageNo : {type:[Number,String], default: 1},
+        pageSize: {type:[Number, String], default: 5}
     })
     const currentPage = ref(Number(props.pageNo))
     const bloglists = [
@@ -77,7 +78,7 @@ const { ref }=require("@vue/reactivity")
         {id : "58","title": "贺新郎·甚矣吾哀矣 辛弃疾" , "content" : "邑中园亭，仆皆为赋此词。一日，独坐停云，水声山色，竞来相娱。意溪山欲援例者，遂作数语，庶几仿佛渊明思亲友之意云。甚矣吾衰矣。怅平生、交游零落，只今余几！白发空垂三千丈，一笑人间万事。问何物、能令公喜？我见青山多妩媚，料青山见我应如是。情与貌，略相似。一尊搔首东窗里。想渊明、《停云》诗就，此时风味。江左沉酣求名者，岂识浊醪妙理。回首叫、云飞风起。不恨古人吾不见，恨古人不见吾狂耳。知我者，二三子。", "timedate" : "2021-11-16 20:37"},
         {id : "59","title": "临江仙·身外闲愁空满 晏几道" , "content" : "身外闲愁空满，眼中欢事常稀。明年应赋送君诗。细从今夜数，相会几多时。浅酒欲邀谁劝，深情惟有君知。东溪春近好同归。柳垂江上影，梅谢雪中枝。", "timedate" : "2021-11-16 20:37"},
     ]
-    const currentList = []
+    const currentList = bloglists.splice((currentPage.value - 1)*props.pageSize,props.pageSize)
 </script>
 
 <style lang="less" scoped>
@@ -96,6 +97,10 @@ const { ref }=require("@vue/reactivity")
             font-size: 16px;
             text-align: start;
             margin: 10px 0;
+            overflow: hidden;
+            display: block;
+            white-space: nowrap;
+            width: -webkit-fill-available;
         }
         .timedate{
             .FontStyle();

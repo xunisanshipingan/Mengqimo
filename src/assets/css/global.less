@@ -2,6 +2,9 @@
 .FontStyle{
     font-size: 14px;
 }
+span,a,p{
+    font-family: 'FZSJ';
+}
 // a标签去除下划线
 a{
     text-decoration: none;
@@ -36,6 +39,7 @@ body{
     color: rgb(229 231 235/var(--tw-text-opacity));
     margin: 0;
     background: #950d0d;
+    font-family: 'FZSJ';
 }
 // 鼠标样式
 
@@ -51,4 +55,18 @@ body{
     --black-light: rgba(31,41,55,.6);
     --black-lighter: rgba(31,41,55,.4);
     --card-box-shadow:0 3px 8px 6px rgba(7,17,27,0.05);
+}
+
+// 滚动条样式
+::-webkit-scrollbar-track {
+    border: 1px solid #3f4a59;
+    background-color: #950d0d;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #3f4a59;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #3f4a59;
 }
