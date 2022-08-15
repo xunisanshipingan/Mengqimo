@@ -16,6 +16,21 @@
 > 将远程仓库内容同步到本地
 ```git pull --rebase master```
 
+#### 分支命令
+> 创建分支
+```git branch dev```
+> 切换分支
+```
+git switch dev
+git checkout dev
+```
+> 查看所有分支
+```git branch```
+> 合并分支到当前分支
+```git merge dev```
+> 删除分支
+```git branch -D dev```
+
 #### 故障处理
 > git add的时候报错LF换行--解决方法
 git config --global core.autocrlf true
