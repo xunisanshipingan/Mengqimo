@@ -10,10 +10,12 @@
 
 ***
 具体方法如下：
+
 **注册**
 1. 在utils.js中添加export default
     const btf = {}
     export default {btf}
+    
 **使用**
 - **方法一(不推荐)**
 1. 在main.js中引入utils.js以及添加至vue全局变量
