@@ -135,6 +135,7 @@ const btf = {
     }
   },
 
+  // 回到顶部
   scrollToDest: (pos, time) => {
     if (pos < 0 || time < 0) {
       return

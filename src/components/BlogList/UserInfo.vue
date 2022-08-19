@@ -5,26 +5,47 @@
         </div>
         <span class="name">慕师</span>
         <div class="poetry">
-            <span class="signature">{{signaturelist}}</span>
+            <span class="signature">{{currentSignature}}</span>
             <span class="type_cousor" :class="{type_cousor_1 : isend}">|</span>
         </div>
     </div>
 </template>
 
-<script>
-    export default{
-        name : "userinfo",
-        setup (){
-            const signaturelist = "譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也",
-                isend = true
+<script setup>
+import { watch, watchEffect } from "@vue/runtime-core";
 
-            const result = {
-                signaturelist,isend
-            }
-            return result
+const { ref }=require("@vue/reactivity");
+    const signature = "譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也"
+    let currentSignature = ref('')
+    let isend = ref(true)
+    let currentCount = ref(0)
+    const signatureCount = signature.length
+    // 逐字递增
+    function interval (){
+        currentSignature.value += signature[currentCount.value]
+        currentCount.value = currentCount.value + 1
+    }
+    // 逐字递减
+    function interval_1 (){
+        if(currentSignature.value.length > 0){
+            currentSignature.value = currentSignature.value.substr(0, currentSignature.value.length - 1)
+            setTimeout(interval_1, 50)
+        }else{
+            currentCount.value = 0
         }
     }
+    // 侦查器
+    watchEffect(()=>{
+        if(currentCount.value < signatureCount){
+            isend.value = true
+            setTimeout(interval, 200)
+        }else{
+            isend.value = false
+            setTimeout(interval_1, 4000)
+        }
+    })
 </script>
+
 
 <style lang="less" scoped>
     .UserInfo{

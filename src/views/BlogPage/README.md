@@ -8,3 +8,7 @@
 | 4 | WIllLearn.md | 学习目标 |
 | 5 | Ipath.md | 项目环境安装 |
 | 6 | JavaToMysql | java连接数据库时的各种问题 |
+| 7 | JSQuestion | js遇到的各种问题|
+| 8 | Linux_centos | linux关于centos的各种问题 |
+| 9 | docker_compose | 配置文件 |
+| 10 | Vue_watchEffect | watchEffect的API说明 |
