@@ -93,4 +93,10 @@ import { reactive, ref } from "@vue/reactivity"
         width: 40%;
         padding: 0 30%;
     }
+    @media (max-width: 600px) {
+        .BlogContainer{
+            width: 80%;
+            padding: 0 10%;
+        }
+    }
 </style>
