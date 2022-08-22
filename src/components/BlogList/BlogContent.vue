@@ -1,10 +1,10 @@
 <!-- blogs(获取列表并显示) -->
 <template>
-    <a href="" class="bloginfo">
+    <div class="bloginfo">
         <span class="title">{{title}}</span>
-        <span class="content">{{content}}</span>
+        <span class="content" @click="showPoetry">{{content}}</span>
         <span class="timedate">{{timedate}}</span>
-    </a>
+    </div>
 </template>
 
 <script setup>
@@ -18,6 +18,11 @@ const { ref }=require("@vue/reactivity")
     const title = ref(props.title),
           content = ref(props.content),
           timedate = ref(props.timedate)
+
+    const showPoetry = (e)=>{
+        const poetry = e.target.innerHTML
+        // 新组建弹窗，样式为诗词，竖排，田字格
+    }
 </script>
 
 <style lang="less" scoped>
@@ -26,6 +31,7 @@ const { ref }=require("@vue/reactivity")
         flex-direction: column;
         align-items: flex-start;
         padding: 25px;
+        cursor: pointer;
         .title{
             font-weight: bold;
             font-size: 16px;

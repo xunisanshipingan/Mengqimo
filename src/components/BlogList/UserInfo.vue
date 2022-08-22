@@ -1,7 +1,7 @@
 <template>
     <div class="UserInfo">
         <div class="avatar">
-            <img src="../../assets/images/avatar.png" alt="头像">
+            <img src="../../assets/images/avatar1.png" alt="头像">
         </div>
         <span class="name">慕师</span>
         <div class="poetry">
