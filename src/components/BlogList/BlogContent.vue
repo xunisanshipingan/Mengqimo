@@ -9,7 +9,6 @@
 
 <script setup>
 const { ref }=require("@vue/reactivity")
-
     const props = defineProps({
         title : {type:[Number,String], default: "标题"},
         content: {type:[Number, String], default: "内容"},

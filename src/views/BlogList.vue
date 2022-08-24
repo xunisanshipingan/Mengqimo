@@ -7,12 +7,14 @@
         <div class="Rss">
 
         </div>
+        <dialogs :visible="false" :title="1" :comtent="2"></dialogs>
     </div>
 </template>
 
 <script setup>
 import userinfo from "@/components/BlogList/UserInfo.vue"
 import blogs from "@/components/BlogList/BlogContent.vue"
+import dialogs from "@/components/Utils/Dialog.vue"
 import page from '@/components/Utils/Page.vue'
 import { reactive, ref } from "@vue/reactivity"
     // 当前页面

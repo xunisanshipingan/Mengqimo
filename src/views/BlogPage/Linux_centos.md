@@ -6,26 +6,36 @@
    - 下方选择U盘
    - 点击启动，刻录硬盘镜像，选择HDD+
    - 刻录完毕后插入电脑选择启动项即可
-2. 更改yum源
+2. 将用户into添加到sudoers中
+   - sudo - root 
+   - chmod 640 /etc/sudoers
+   - vim /etc/sudoers
+   - 原： root ALL=(ALL) ALL
+   - 现： root下一行添加into ALL=(ALL) ALL
+   - 保存
+3. 更改yum源
    - 进入yum配置目录 ```cd /etc/yum.repos.d```
    - 如果没有安装则首先 ```sudo yum install wget```
    - 备份原yum ```sudo mv CentOs-Base.repo CentOs-Base.repo.backup```
-   - CentOs 5
-     - ```sudo wget -O CentOS-Base.repo https://lug.ustc.edu.cn/wiki/_export/code/mirrors/help/centos?codeblock=1```
-   - CentOs 6
-     - ```sudo wget -O CentOS-Base.repo https://lug.ustc.edu.cn/wiki/_export/code/mirrors/help/centos?codeblock=2```
-   - CentOs 7
-     - ```sudo wget -O CentOS-Base.repo https://lug.ustc.edu.cn/wiki/_export/code/mirrors/help/centos?codeblock=3```
+   - CentOS 5
+     - ```wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo```
+     - ```curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo```
+   - CentOS 6
+     - ```wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo```
+     - ```curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo```
+   - CentOS 7
+     - ```wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo```
+     - ```curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo```
    - 更新源数据
      - sudo yum clean all
      - sudo yum makecache
-3. Gitlab部署
+4. Gitlab部署
    - 作用：Gitlab是一个本地的代码库
    - 通过docker进行安装
    - 首先安装docker
      - ```wget -qO- https://get.docker.com/ | sh```
      - 添加用户到docker组
-       - 创建： sudo group docker
+       - 创建： sudo groupadd docker
        - 添加： sudo usermod -aG docker $USER
      - 设置引导时自动启动
        - ```sudo systemctl enable docker.service```
@@ -35,8 +45,10 @@
      - 安装docker-compose前需要安装pip(注意pip版本)
        - ```sudo yum install epel-release```
        - ```sudo yum install -y python-pip```
+     - 换源
+       - pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
      - 安装docker-compose
-       - ```sudo pip install docker-compose```
+       - ```sudo pip3 install docker-compose```
    - 部署Gitlab
      - 创建文件夹，并创建配置文件
        - ```mkdir gitlab```
@@ -48,4 +60,4 @@
        - ```docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_passwprd```
    - 浏览器启动Gitlab
      - 访问localhost:80即可打开登录界面，通过root与临时密码进行登录
-4. 
+5. 
