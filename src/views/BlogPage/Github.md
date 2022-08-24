@@ -44,6 +44,22 @@ git checkout dev
 
 ```git branch -D dev```
 ***
+### **ssh连接**
+1. 打开git bash
+2. 创建密钥：```ssh-keygen -t rsa -C 'your_email@example.com'```
+3. 回车直到创建完成
+4. 添加ssh到账户
+    - ```ssh-agent bash```
+    - ```ssh-add ~/.ssh/id-rsa```
+    - 输出```Identity added: id_rsa (your_email@example.com)```则成功
+5. ```cat ~/.ssh/id-rsa.pub```复制ssh值
+6. 去github网站，添加ssh值到里面
+7. 测试ssh是否成功```ssh -T git@github.com```
+8. 配置git使用ssh密钥remote
+   - 打开github仓库，复制ssh值
+   - 在本地项目目录输入 ```git remote set-url origin git@github.com:xxxxx.git```
+   - ```git remote -v```检查是否更改成功
+***
 ### **故障处理**
 > git add的时候报错LF换行--解决方法
 git config --global core.autocrlf true
