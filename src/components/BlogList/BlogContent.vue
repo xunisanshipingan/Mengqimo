@@ -8,7 +8,9 @@
 </template>
 
 <script setup>
-const { ref }=require("@vue/reactivity")
+import { ref } from 'vue';
+
+
     const props = defineProps({
         title : {type:[Number,String], default: "标题"},
         content: {type:[Number, String], default: "内容"},

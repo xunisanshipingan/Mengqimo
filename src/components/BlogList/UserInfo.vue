@@ -12,9 +12,8 @@
 </template>
 
 <script setup>
-import { watch, watchEffect } from "@vue/runtime-core";
+import { ref, watch, watchEffect } from "@vue/runtime-core";
 
-const { ref }=require("@vue/reactivity");
     const signature = "譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也"
     let currentSignature = ref('')
     let isend = ref(true)

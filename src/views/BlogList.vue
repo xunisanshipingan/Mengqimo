@@ -2,12 +2,9 @@
 <template>
     <div class="BlogContainer">
         <userinfo></userinfo>
-        <blogs v-for="item in currentList.value" :key="item.id" :title="item.title" :content="item.content" :timedate="item.timedate"></blogs>
+        <blogs v-for="item in currentList.value" :key="item.id" :title="item.title" :content="item.content" :timedate="item.timedate" @click="showPoetry(item.id)"></blogs>
         <page :pageNo="currentPage" :total="total" :pageSize="pageSize" @setPageNo="setPageNo"></page>
-        <div class="Rss">
-
-        </div>
-        <dialogs :visible="false" :title="1" :comtent="2"></dialogs>
+        <dialogs :visible="poetryDialog.visible" :title="poetryDialog.title" :content="poetryDialog.content" :author="poetryDialog.author" @closeDialog="closeDialog"></dialogs>
     </div>
 </template>
 
@@ -84,9 +81,26 @@ import { reactive, ref } from "@vue/reactivity"
     ]
     const total = bloglists.length
     const currentList = reactive({value:bloglists.slice((currentPage.value - 1)*pageSize.value,currentPage.value*pageSize.value)})
-    const setPageNo =  (e) => {
-        currentPage.value = e
+    const setPageNo =  (nowPage) => {
+        currentPage.value = nowPage
         currentList.value = bloglists.slice((currentPage.value - 1)*pageSize.value,currentPage.value*pageSize.value)
+    }
+    // 诗词弹窗相关变量
+    let poetryDialog = reactive({
+        title : 'title',
+        content : 'content',
+        author : 'author',
+        visible : false
+    })
+    const showPoetry = (id)=>{
+        id--
+        poetryDialog.title = bloglists[id].title.split(' ')[0]
+        poetryDialog.author = bloglists[id].title.split(' ')[1]
+        poetryDialog.content = bloglists[id].content
+        poetryDialog.visible = true
+    }
+    const closeDialog = (e) => {
+        poetryDialog.visible = e
     }
 </script>
 

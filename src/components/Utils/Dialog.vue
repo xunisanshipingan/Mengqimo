@@ -1,22 +1,32 @@
 <template>
-    <div class="modal" v-show="showIn">
+    <div class="modal" v-show="props.visible">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">醉后却寄元九</div>
-                <div class="modal-body">蒲池村里悤悤别，沣水桥边兀兀回。行到城门残酒醒，万重离恨一时来。</div>
-                <div class="modal-footer">白居易</div>
+                <div class="modal-header">{{props.title}}</div>
+                <div class="modal-body">
+                    <div v-for="item in props.content" :key="item">{{item}}</div>
+                </div>
+                <div class="modal-footer">{{props.author}}</div>
             </div>
         </div>
     </div>
-    <div class="modal-backdrop" v-show="showIn"></div>
+    <div class="modal-backdrop" v-show="props.visible" @click="closeDialog"></div>
 </template>
 
 <script setup>
-const { ref }=require("@vue/reactivity")
+import { ref } from 'vue';
 
-let showIn = ref(true)
-const show = ()=>{
-    showIn.value = false
+const props = defineProps({
+    visible : {type: [Number, String, Boolean], default: true},
+    title : {type: [Number, String], default: 'title'},
+    content : {type: [Number, String], default: 'content'},
+    author : {type: [Number, String], default: 'author'},
+})
+let visible = ref(props.visible)
+const emits = defineEmits(['closeDialog'])
+const closeDialog = ()=>{
+    visible.value = false
+    emits('closeDialog', visible.value)
 }
 </script>
 
@@ -35,18 +45,29 @@ const show = ()=>{
         color: #000;
         font-family: "FZSJ";
         border-radius: 10px;
-        .modal-header{
-            font-size: 38px;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-        .modal-body{
-            padding-top: 30px;
-            font-size: 30px;
-            writing-mode: vertical-lr;
-            height: 380px;
-            letter-spacing: 15px;
-            line-height: 55px;
+        .modal-content{
+            .modal-header{
+                font-size: 38px;
+                font-weight: bold;
+                letter-spacing: 3px;
+            }
+            .modal-body{
+                padding-top: 30px;
+                font-size: 30px;
+                max-height: 500px;
+                width: 1000px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                div{
+                    line-height: 50px;
+                    width: 50px;
+                    border: 1px #f00 solid;
+                }
+            }
+            .modal-footer{
+                padding-top: 30px;
+            }
         }
     }
     .modal-backdrop{
