@@ -98,6 +98,7 @@ import { reactive, ref } from "@vue/reactivity"
         poetryDialog.author = bloglists[id].title.split(' ')[1]
         poetryDialog.content = bloglists[id].content
         poetryDialog.visible = true
+        document.querySelector('.modal-body').style.cssText = "width:" + poetryDialog.content.length * 7 + "px"
     }
     const closeDialog = (e) => {
         poetryDialog.visible = e

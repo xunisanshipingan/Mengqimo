@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">{{props.title}}</div>
                 <div class="modal-body">
-                    <div v-for="item in props.content" :key="item">{{item}}</div>
+                    <div v-for="key in props.content">{{key}}</div>
                 </div>
                 <div class="modal-footer">{{props.author}}</div>
             </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
     visible : {type: [Number, String, Boolean], default: true},
@@ -47,15 +47,16 @@ const closeDialog = ()=>{
         border-radius: 10px;
         .modal-content{
             .modal-header{
-                font-size: 38px;
+                font-size: 35px;
                 font-weight: bold;
                 letter-spacing: 3px;
+                font-family: 'FZSJ';
             }
             .modal-body{
                 padding-top: 30px;
                 font-size: 30px;
                 max-height: 500px;
-                width: 1000px;
+                min-width: 400px;
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: column;
@@ -63,6 +64,10 @@ const closeDialog = ()=>{
                     line-height: 50px;
                     width: 50px;
                     border: 1px #f00 solid;
+                }
+                div:before{
+                    content: '';
+                    border-top: solid 1px #000;
                 }
             }
             .modal-footer{
