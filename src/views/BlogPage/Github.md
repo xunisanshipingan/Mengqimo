@@ -37,6 +37,12 @@
 
 > 查看当前
 
+> 删除远程信息
+    git remote rm origin
+
+> 添加远程信息
+    git remote add origin "xxx.git"
+
 ***
 ### **分支命令**
 

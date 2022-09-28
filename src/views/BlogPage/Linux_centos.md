@@ -60,4 +60,19 @@
        - ```docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_passwprd```
    - 浏览器启动Gitlab
      - 访问localhost:80即可打开登录界面，通过root与临时密码进行登录
-5. 
+5. Gitlab修改管理员密码
+   - 查看所有容器
+     - ```docker ps```
+   - 进入容器
+     - ```docker exec -it gitlab (容器名) bash
+   - 启动Ruby
+     - ```gitlab-rails console -e production```
+   - 选择用户
+     - ```user = User.where(id: 1).first```
+   - 更改密码
+     - ```user.password = 'xxx'
+     - ```user.password_confirmation = 'xxx'
+   - 保存
+     - ```user.save!```
+   - 退出
+     - ```quit & exit```
