@@ -65,10 +65,6 @@ const closeDialog = ()=>{
                     width: 50px;
                     border: 1px #f00 solid;
                 }
-                div:before{
-                    content: '';
-                    border-top: solid 1px #000;
-                }
             }
             .modal-footer{
                 padding-top: 30px;

@@ -286,6 +286,7 @@ program
 系统环境变量与用户环境变量只需要有一个就可以  在cmd中使用echo %Path%的时候  显示的是两个环境变量综合的结果  容易在添加环境变量的过程中混淆与重复
 建议使用系统变量  其中在设置系统变量时  需要在setx命令后加上 -m 才能保存到系统变量里
 由于修改Path后  需要**重启cmd才能获取到最新的变量**  所以不可以把所有环境的配置放在同一个bat里  在试错了一个小时后  把几个软件的环境变量配置修改成了单独的bat脚本
+Path也有长度限制  不可以无限添加  当Path长度过长  会省略最后的字符  导致系统指令(sc tasklist)失效
 ___
 **注册表的控制台语法**
 1. 在根键"HKEY_CURRENT_USER"下创建一个子键"qingsword"，在这个子键中，添加一个值名称为"hello"，类型为"REG_ZS"，数据为"welcome to my website"
@@ -317,5 +318,6 @@ ___
 ___
 **选择数据库版本**
 
-安装数据库时可能报错 **由于找不到MYVCR 1200.dll，无法继续执行，重新安装程序可能会解决此问题** 这时候表示电脑里缺少文件  通过安装Visual Studio可以解决
-通过多次试验  已验证MySQL版本为5.7时下载Visual Studio 2013[下载地址](https://www.microsoft.com/zh-cn/download/details.aspx?id=646b8502-045c-48f7-9267-2b79ad566007)可以解决该问题
+安装数据库时可能报错 **由于找不到MYVCR 120.dll，无法继续执行，重新安装程序可能会解决此问题** 这时候表示电脑里缺少文件  通过安装Visual Studio可以解决
+通过多次试验  已验证MySQL版本为5.7时下载Visual Studio 2013[下载地址](https://www.microsoft.com/zh-CN/download/details.aspx?id=40784)可以解决该问题
+___
