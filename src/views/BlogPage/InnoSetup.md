@@ -18,6 +18,7 @@
 |-|-|
 |init-path.bat|添加系统变量|
 |init-mysql.bat|MySQL初始化|
+|neo4j-install.bat|安装neo4j服务|
 |my.ini|MySQL配置文件|
 |start.bat|开始执行程序|
 |start_neo4j.bat|启动neo4j|

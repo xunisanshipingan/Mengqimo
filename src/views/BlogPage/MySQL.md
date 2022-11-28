@@ -2,4 +2,5 @@
 
 1. 导出指定数据库的所有表格
     mysqldump -u[username] -p[password] --databases [databases] > dump.sql
-2. 
+2. 修改密码
+    

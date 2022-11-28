@@ -14,5 +14,8 @@
 ## 博客访问
 博客地址：[https://mengqimo.cn/#/](https://mengqimo.cn/#/)
 ***
+## 启动
+yarn serve
+***
 ### 作者
 慕师(Mushi)
