@@ -4,3 +4,6 @@
     mysqldump -u[username] -p[password] --databases [databases] > dump.sql
 2. 修改密码
     
+3. 创建数据库
+    CREATE DATABASE IF NOT EXISTS transmittal_data_install DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
+    USE transmittal_data_install;

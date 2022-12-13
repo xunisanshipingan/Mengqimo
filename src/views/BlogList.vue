@@ -4,7 +4,9 @@
         <userinfo></userinfo>
         <blogs v-for="item in currentList.value" :key="item.id" :title="item.title" :content="item.content" :timedate="item.timedate" @click="showPoetry(item.id)"></blogs>
         <page :pageNo="currentPage" :total="total" :pageSize="pageSize" @setPageNo="setPageNo"></page>
-        <dialogs :visible="poetryDialog.visible" :title="poetryDialog.title" :content="poetryDialog.content" :author="poetryDialog.author" @closeDialog="closeDialog"></dialogs>
+        <Transition>
+            <dialogs v-if="poetryDialog.visible" :modal_width="poetryDialog.modal_width" :title="poetryDialog.title" :content="poetryDialog.content" :author="poetryDialog.author" @closeDialog="closeDialog"></dialogs>
+        </Transition>
     </div>
 </template>
 
@@ -90,22 +92,33 @@ import { reactive, ref } from "@vue/reactivity"
         title : 'title',
         content : 'content',
         author : 'author',
-        visible : false
+        visible : false,
+        modal_width: 0
     })
     const showPoetry = (id)=>{
         id--
         poetryDialog.title = bloglists[id].title.split(' ')[0]
         poetryDialog.author = bloglists[id].title.split(' ')[1]
         poetryDialog.content = bloglists[id].content
+        poetryDialog.modal_width = poetryDialog.content.length * 7
         poetryDialog.visible = true
-        document.querySelector('.modal-body').style.cssText = "width:" + poetryDialog.content.length * 7 + "px"
     }
-    const closeDialog = (e) => {
-        poetryDialog.visible = e
+    const closeDialog = ()=>{
+        poetryDialog.visible = false
     }
 </script>
 
 <style lang="less" scoped>
+
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
     .BlogContainer {
         width: 40%;
         padding: 0 30%;

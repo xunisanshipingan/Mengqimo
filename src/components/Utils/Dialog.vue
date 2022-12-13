@@ -1,32 +1,32 @@
 <template>
-    <div class="modal" v-show="props.visible">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">{{props.title}}</div>
-                <div class="modal-body">
-                    <div v-for="key in props.content">{{key}}</div>
+    <div class="dialog-main">
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">{{props.title}}</div>
+                    <div class="modal-body" :style="{ width: props.modal_width + 'px'}">
+                        <div v-for="key in props.content">{{key}}</div>
+                    </div>
+                    <div class="modal-footer">{{props.author}}</div>
                 </div>
-                <div class="modal-footer">{{props.author}}</div>
             </div>
         </div>
+        <div class="modal-backdrop" @click="closeDialog"></div>
     </div>
-    <div class="modal-backdrop" v-show="props.visible" @click="closeDialog"></div>
 </template>
 
 <script setup>
 import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
-    visible : {type: [Number, String, Boolean], default: true},
     title : {type: [Number, String], default: 'title'},
     content : {type: [Number, String], default: 'content'},
     author : {type: [Number, String], default: 'author'},
+    modal_width: {type: [Number, String], default: 0}
 })
-let visible = ref(props.visible)
 const emits = defineEmits(['closeDialog'])
 const closeDialog = ()=>{
-    visible.value = false
-    emits('closeDialog', visible.value)
+    emits('closeDialog')
 }
 </script>
 
@@ -39,7 +39,7 @@ const closeDialog = ()=>{
         left: 50%;
         transform: translate(-50%,-50%);
         opacity: 1;
-        transition: opacity .15s linear;
+        transition: opacity .5s linear;
         background: #fff;
         padding: 20px;
         color: #000;
