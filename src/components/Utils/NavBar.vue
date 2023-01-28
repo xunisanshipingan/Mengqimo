@@ -12,7 +12,7 @@ export default {
     setup(){
         const navlist = [
             {"id" : "1","name" : "浮生四梦","host" : "bloglist"},
-            {"id" : "2","name" : "姻缘一线","host":"subscribe"},
+            {"id" : "2","name" : "姻缘一线","host": "subscribe"},
             {"id" : "3","name" : "摘叶飞花","host" : "anthology"}
         ]
         const result = {

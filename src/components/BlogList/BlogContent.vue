@@ -20,10 +20,6 @@ import { ref } from 'vue';
           content = ref(props.content),
           timedate = ref(props.timedate)
 
-    const showPoetry = (e)=>{
-        const poetry = e.target.innerHTML
-        // 新组建弹窗，样式为诗词，竖排，田字格
-    }
 </script>
 
 <style lang="less" scoped>

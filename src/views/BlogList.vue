@@ -1,4 +1,4 @@
-<!-- 浮生四梦(风花雪月)(琴棋书画) -->
+<!-- 浮生四梦(风花雪月) -->
 <template>
     <div class="BlogContainer">
         <userinfo></userinfo>
@@ -16,9 +16,6 @@ import blogs from "@/components/BlogList/BlogContent.vue"
 import dialogs from "@/components/Utils/Dialog.vue"
 import page from '@/components/Utils/Page.vue'
 import { reactive, ref } from "@vue/reactivity"
-    // 当前页面
-    const currentPage = ref(1)
-    const pageSize = ref(10)
     // 博客列表
     const bloglists = [
         {id : "1","title": "小戎 佚名" , "content" : "小戎俴收，五楘梁辀。游环胁驱，阴靷鋈续。文茵畅毂，驾我骐馵。言念君子，温其如玉。在其板屋，乱我心曲。四牡孔阜，六辔在手。骐骝是中，騧骊是骖。龙盾之合，鋈以觼軜。言念君子，温其在邑。方何为期？胡然我念之。俴驷孔群，厹矛鋈錞。蒙伐有苑，虎韔镂膺。交韔二弓，竹闭绲滕。言念君子，载寝载兴。厌厌良人，秩秩德音。", "timedate" : "2021-11-16 20:37"},
@@ -81,6 +78,10 @@ import { reactive, ref } from "@vue/reactivity"
         {id : "58","title": "贺新郎·甚矣吾哀矣 辛弃疾" , "content" : "邑中园亭，仆皆为赋此词。一日，独坐停云，水声山色，竞来相娱。意溪山欲援例者，遂作数语，庶几仿佛渊明思亲友之意云。甚矣吾衰矣。怅平生、交游零落，只今余几！白发空垂三千丈，一笑人间万事。问何物、能令公喜？我见青山多妩媚，料青山见我应如是。情与貌，略相似。一尊搔首东窗里。想渊明、《停云》诗就，此时风味。江左沉酣求名者，岂识浊醪妙理。回首叫、云飞风起。不恨古人吾不见，恨古人不见吾狂耳。知我者，二三子。", "timedate" : "2021-11-16 20:37"},
         {id : "59","title": "临江仙·身外闲愁空满 晏几道" , "content" : "身外闲愁空满，眼中欢事常稀。明年应赋送君诗。细从今夜数，相会几多时。浅酒欲邀谁劝，深情惟有君知。东溪春近好同归。柳垂江上影，梅谢雪中枝。", "timedate" : "2021-11-16 20:37"},
     ]
+    // 当前页面
+    const currentPage = ref(1)
+    const pageSize = ref(10)
+    
     const total = bloglists.length
     const currentList = reactive({value:bloglists.slice((currentPage.value - 1)*pageSize.value,currentPage.value*pageSize.value)})
     const setPageNo =  (nowPage) => {
@@ -95,6 +96,7 @@ import { reactive, ref } from "@vue/reactivity"
         visible : false,
         modal_width: 0
     })
+    // 通过诗词id显示弹窗
     const showPoetry = (id)=>{
         id--
         poetryDialog.title = bloglists[id].title.split(' ')[0]
@@ -103,6 +105,7 @@ import { reactive, ref } from "@vue/reactivity"
         poetryDialog.modal_width = poetryDialog.content.length * 7
         poetryDialog.visible = true
     }
+    // 关闭弹窗
     const closeDialog = ()=>{
         poetryDialog.visible = false
     }
