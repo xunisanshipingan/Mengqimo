@@ -24,6 +24,12 @@ const routes = [
     name: 'subscribe',
     component: () => import('@/views/Subscribe.vue')
   },
+  // 测试
+  {
+    path: '/test',
+    name: 'test',
+    component: ()=> import('@/views/test/test1.vue')
+  },
 ]
 
 const router = createRouter({

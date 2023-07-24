@@ -35,8 +35,8 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
+		"tests/**/*.tsx",
+		"src/views/FourDreams/shu/poetry.js"	],
 	"exclude": [
 		"node_modules",
 	]

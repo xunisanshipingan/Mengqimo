@@ -12,16 +12,26 @@
 </template>
 
 <script setup>
-import { ref, watch, watchEffect } from "@vue/runtime-core";
+import { reactive, ref, watch, watchEffect } from "@vue/runtime-core";
 
-    const signature = "譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也"
+    const signatures = reactive([
+        "十年一觉扬州梦，赢得青楼薄幸名",
+        '譬如高山，未成一篑，止，吾止也；譬如平地，虽覆一篑，往，吾往也',
+        '愁与西风应有约，年年同赴清秋',
+        '都道无人愁似我，今夜雪，有梅花，似我愁'
+    ])
+    // 当前语句序号
+    const signNum = ref(0)
     let currentSignature = ref('')
+    // 该句是否结束
     let isend = ref(true)
+    // 当前闪动字节位置
     let currentCount = ref(0)
-    const signatureCount = signature.length
+    // 当前语句总字数
+    let signatureCount = signatures[signNum.value].length
     // 逐字递增
     function interval (){
-        currentSignature.value += signature[currentCount.value]
+        currentSignature.value += signatures[signNum.value][currentCount.value]
         currentCount.value = currentCount.value + 1
     }
     // 逐字递减
@@ -40,6 +50,12 @@ import { ref, watch, watchEffect } from "@vue/runtime-core";
             setTimeout(interval, 200)
         }else{
             isend.value = false
+            if(signNum.value + 1 < signatures.length){
+                signNum.value += 1
+            }else {
+                signNum.value = 0
+            }
+            signatureCount = signatures[signNum.value].length
             setTimeout(interval_1, 4000)
         }
     })

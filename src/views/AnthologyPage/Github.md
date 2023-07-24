@@ -34,6 +34,7 @@
     git reset [--soft | --mixed | --hard] [HEAD]
     mixed，默认，用于重置暂存区同步上一次的提交
     hard ，撤销工作区未提交内容，将暂存区工作区回退到上一版本，删除提交信息
+    soft , 用于版本的回退，只进行对commit操作的回退，不影响工作区的文件
 
 > 查看当前
 
@@ -87,3 +88,14 @@
 > git add的时候报错LF换行--解决方法
 
     git config --global core.autocrlf true
+
+> 错误分支提交改动后需要将改动更换到正式分支
+  正式分支：master，page托管分支：gh-page
+  在gh-page写完改动与提交后发现错误。目的是在gh-page上删掉改动，把改动移到master分支上，顺序提交到github
+
+1. 在gh-page分支通过reset回撤commit命令
+2. 通过stash命令将改动保存
+3. 切换分支到master
+4. 通过stash pop命令将之前保存的改动释放
+5. 正常commit提交
+6. 命令为：git reset --soft HEAD^   ===>    git stash   ===>    git checkout master ===>    git stash pop   ===>    add commit push

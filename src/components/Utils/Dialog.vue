@@ -4,8 +4,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">{{props.title}}</div>
-                    <div class="modal-body" :style="{ width: props.modal_width + 'px'}">
-                        <div v-for="key in props.content">{{key}}</div>
+                    <div class="modal-body" :style="{ width: clist.length*60 + 'px', height: height*55 + 'px'}">
+                        <div class="ver" v-for="item in clist">
+                            <div class="hor" v-for="key in item">{{key}}</div>
+                        </div>
                     </div>
                     <div class="modal-footer">{{props.author}}</div>
                 </div>
@@ -22,9 +24,19 @@ const props = defineProps({
     title : {type: [Number, String], default: 'title'},
     content : {type: [Number, String], default: 'content'},
     author : {type: [Number, String], default: 'author'},
-    modal_width: {type: [Number, String], default: 0}
 })
 const emits = defineEmits(['closeDialog'])
+
+// 循环并以逗号分隔为一列
+let clist = props.content.split(/[,，.。!！；?？、]/), height = ref(0)
+
+clist.pop()
+console.log(clist)
+clist.forEach((v,k)=>{
+    if(v.length>height.value) (height.value = v.length)
+})
+
+
 const closeDialog = ()=>{
     emits('closeDialog')
 }
@@ -55,11 +67,15 @@ const closeDialog = ()=>{
             .modal-body{
                 padding-top: 30px;
                 font-size: 30px;
+                max-width: 1600px;
                 max-height: 500px;
-                min-width: 400px;
+                overflow-x: auto;
+                overflow-y: auto;
                 display: flex;
-                flex-wrap: wrap;
-                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                flex-direction: row;
+                align-items: flex-start;
                 div{
                     line-height: 50px;
                     width: 50px;
